@@ -310,6 +310,7 @@ const SearchFilters: React.FC<Filters & Props> = ({
                     displayValue="name"
                     closeIcon="cancel"
                     onSelect={handleGenreChange}
+                    onRemove={handleGenreChange}
                     selectedValues={state.selectedGenres}
                     style={{
                       searchBox: {

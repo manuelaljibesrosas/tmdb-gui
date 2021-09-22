@@ -29,7 +29,7 @@ const MovieDetails: React.FC = () => {
     setShowFullPlot(!showFullPlot);
   }, [setShowFullPlot, showFullPlot]);
 
-  if (!movieDetails) return null;
+  if (!movieDetails || movieDetails.id !== parseInt(id)) return null;
 
   const rating =
     (movieDetails.vote_average !== undefined || 0) && movieDetails.vote_average;

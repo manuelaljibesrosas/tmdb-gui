@@ -27,7 +27,7 @@ const SearchFilters: React.FC<Filters & Props> = ({
 }) => {
   const searchQueryInput = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showClearTextBtn, setShowClearTextBtn] = useState(false);
+  const [showClearTextBtn, setShowClearTextBtn] = useState(query.length > 0);
   const [state, setState] = useState({
     selectedGenres,
     minimumRating,

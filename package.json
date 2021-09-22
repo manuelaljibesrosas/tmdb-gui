@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npx mocha --recursive __tests__",
     "start": "npx webpack serve --config .webpack/webpack.dev.js",
-    "lint": "npx eslint src/**/* --ignore-pattern *.svg"
+    "lint": "npx eslint src/**/* --ignore-pattern *.svg",
+    "commit": "npx cz"
   },
   "author": "Manuel Aljibes Rosas <manuelaljibesrosas@gmail.com>",
   "license": "ISC",
@@ -66,5 +67,10 @@
     "webpack": "^5.52.1",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

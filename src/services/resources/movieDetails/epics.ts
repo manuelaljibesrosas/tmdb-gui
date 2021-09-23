@@ -23,7 +23,7 @@ export const fetchMovieDetailsEpic: Epic<
       ).pipe(retry(3)),
     ),
     // map to a Redux action
-    map((response) => movieDetails.success(response)),
+    map(movieDetails.success),
     catchError(() => of(movieDetails.failure())),
   );
 

@@ -1,7 +1,6 @@
 import { combineEpics, Epic } from 'redux-observable';
-import { Observable, of, from } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {
-  mergeMap,
   map,
   retry,
   switchMap,
@@ -10,7 +9,6 @@ import {
   filter,
 } from 'rxjs/operators';
 import { Dependencies, RootState, RootAction } from 'services/store';
-import * as moviesList from 'services/moviesList/actions';
 import { movies } from './actions';
 import { isActionOf } from 'typesafe-actions';
 import { MoviesResponse } from './reducer';
@@ -92,41 +90,7 @@ export const fetchMoviesEpic: Epic<
         );
     }),
     // map to a Redux action sequence
-    mergeMap((response) => {
-      // extract the properties that we care about and filter out
-      // movies that don't have a poster
-      const qs = response.results
-        .map(
-          ({
-            id,
-            title,
-            poster_path: posterURL,
-            vote_average: rating,
-            release_date: releaseDate,
-            genre_ids: genres,
-          }) => ({
-            id,
-            title,
-            posterURL,
-            rating,
-            // release date comes in the format
-            // YYYY-MM-DD, extract the year
-            releaseYear: releaseDate.split('-')[0],
-            genres,
-          }),
-        )
-        .filter(({ posterURL }) => posterURL !== null);
-
-      return from([
-        // TODO: store this results in the resource state
-        // have an epic in the moviesList service that
-        // listens for the SUCCESS action and reads the
-        // state of this resource
-        moviesList.push(qs),
-        // signal success
-        movies.success(response),
-      ]);
-    }),
+    map(movies.success),
     catchError(() => of(movies.failure())),
   );
 

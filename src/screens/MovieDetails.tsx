@@ -15,9 +15,7 @@ import CastMember from 'components/CastMember';
 const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
-  const movieDetails = useSelector(
-    (state: RootState) => state.resources.movieDetails.lastResponse,
-  );
+  const movieDetails = useSelector((state: RootState) => state.movieDetails);
 
   const [showFullPlot, setShowFullPlot] = useState(false);
 
@@ -32,7 +30,7 @@ const MovieDetails: React.FC = () => {
   if (!movieDetails || movieDetails.id !== parseInt(id)) return null;
 
   const rating =
-    (movieDetails.vote_average !== undefined || 0) && movieDetails.vote_average;
+    (movieDetails.rating !== undefined || 0) && movieDetails.rating;
 
   const getStarColor = (minRating: number, rating: number) =>
     rating < minRating ? '#333' : '#fbffad';
@@ -58,7 +56,7 @@ const MovieDetails: React.FC = () => {
             height: 100%;
             object-fit: cover;
           `}
-          src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w500/${movieDetails.posterURL}`}
           alt="movie poster"
         />
         <div
@@ -117,8 +115,8 @@ const MovieDetails: React.FC = () => {
           `}
         >
           <div>
-            {(movieDetails.release_date !== undefined || null) &&
-              movieDetails.release_date.split('-')[0]}
+            {(movieDetails.releaseYear !== undefined || null) &&
+              movieDetails.releaseYear}
           </div>
           <div>
             {(movieDetails.genres !== undefined || null) &&
@@ -289,7 +287,7 @@ const MovieDetails: React.FC = () => {
             `}
           >
             {(movieDetails.recommendations !== undefined || null) &&
-              movieDetails.recommendations.results
+              movieDetails.recommendations
                 .slice(0, 3)
                 .map(
                   ({

@@ -5,7 +5,7 @@ import * as movieDetailsActions from './actions';
 import { Genre } from 'services/moviesList/reducer';
 import { Movie } from 'services/resources/movies/reducer';
 
-type CastMember = {
+export type CastMember = {
   id: number;
   name: string;
   character: string;

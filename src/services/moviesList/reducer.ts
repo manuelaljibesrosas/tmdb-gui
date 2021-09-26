@@ -9,6 +9,7 @@ export type Movie = {
   releaseYear: string;
   rating: number;
   genres: Array<number>;
+  overview: string;
 };
 
 export type Genre = {

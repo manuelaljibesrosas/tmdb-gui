@@ -38,6 +38,7 @@ export const updateListOnMoviesResourceSuccessEpic: Epic<
             vote_average: rating,
             release_date: releaseDate,
             genre_ids: genres,
+            overview,
           }) => ({
             id,
             title,
@@ -47,6 +48,7 @@ export const updateListOnMoviesResourceSuccessEpic: Epic<
             // YYYY-MM-DD, extract the year
             releaseYear: releaseDate.split('-')[0],
             genres,
+            overview,
           }),
         )
         .filter(({ posterURL }) => posterURL !== null);

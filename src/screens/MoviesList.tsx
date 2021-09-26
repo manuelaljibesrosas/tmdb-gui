@@ -78,14 +78,9 @@ const MoviesList: React.FC<Props> = ({
 
       if (movie === undefined) return null;
 
-      const { posterURL, ...rest } = movie;
-
       return (
         <div style={style} key={key}>
-          <MovieItem
-            posterURL={`https://image.tmdb.org/t/p/w185${posterURL}`}
-            {...rest}
-          />
+          <MovieItem {...movie} />
         </div>
       );
     },

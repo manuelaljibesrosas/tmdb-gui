@@ -1,9 +1,12 @@
 /** @jsx jsx */
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { jsx, css } from '@emotion/react';
 import { routes } from 'shared/router';
 import { genres } from 'shared/constants';
+// actions
+import { updateMovieDetails } from 'services/movieDetails/actions';
 // components
 import StarIcon from 'assets/star-icon.svg';
 import { Genre } from 'services/moviesList/reducer';
@@ -20,6 +23,7 @@ type Props = {
   rating: number;
   releaseYear: string;
   genres: Array<number>;
+  overview: string;
 };
 
 const MovieItem: React.FC<Props> = ({
@@ -29,10 +33,22 @@ const MovieItem: React.FC<Props> = ({
   rating,
   releaseYear,
   genres,
+  overview,
 }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const navigateToDetailsPage = useCallback(() => {
+    dispatch(
+      updateMovieDetails({
+        id,
+        posterURL,
+        title,
+        rating,
+        releaseYear,
+        overview,
+      }),
+    );
     history.push(`${routes.MOVIE_DETAILS}/${id}`);
   }, [history]);
 
@@ -54,7 +70,7 @@ const MovieItem: React.FC<Props> = ({
           object-fit: cover;
           border-radius: 10px;
         `}
-        src={posterURL}
+        src={`https://image.tmdb.org/t/p/w185${posterURL}`}
         alt="movie poster thumbnail"
       />
       <div

@@ -11,6 +11,7 @@ export type Movie = {
   release_date: string;
   vote_average: number;
   genre_ids: Array<number>;
+  overview: string;
 };
 
 export type Actions = ActionType<typeof movieActions>;

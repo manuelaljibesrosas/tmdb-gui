@@ -302,6 +302,7 @@ const MovieDetails: React.FC = () => {
                   }) => (
                     <SmallMoviePreview
                       key={id}
+                      id={id}
                       title={title}
                       posterURL={backdrop_path}
                       releaseDate={release_date}
